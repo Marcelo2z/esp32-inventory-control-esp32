@@ -1,20 +1,13 @@
 #include <Keypad.h>
 #include <LiquidCrystal.h>
-/*↑------BIBLIOTECAS------↑*/
-
 
 LiquidCrystal lcd_1(23, 22, 19, 18, 5, 4);
-/*↑------PORTAS-DA-TELA-LCD------↑*/
-
 
 const byte LINHAS = 4;
 const byte COLUNAS = 4;
-/*↑------CONSTRUÇÃO PARA O VETOR DO TECLADO------↑*/
-
-
+  
 bool encontrou = false;
 bool Quantidade = false;
-/*↑------VARIAVEIS BOLEANAS TEMPORARIAS------↑*/
 
 int modo = 0;
 int n = 0;
@@ -27,16 +20,13 @@ int mes;
 int objN;
 int TRN;
 int Save;
-/*↑------VARIAVEIS TEMPORARIAS PARA ESTADOS------↑*/
 
 unsigned long ultimoTempo = 0;
-/*↑------VARIAVEL PARA TIMER------↑*/
-
+  
 String Qnt = "";
 String Sdia = "";
 String Smes = "";
 String numero = "";
-/*↑------VARIAVEIS TEMPORARIAS PARA ESTADOS------↑*/
 
 String idBuscado = "";
 String profLog = "";
@@ -46,7 +36,6 @@ String qntSelecionada = "";
 String dtSelecionada = "";
 String trnSelecionado = "";
 String hrSelecionado = "";
-/*↑------VARIAVEIS TEMPORARIAS PARA GUARDAR INFORMAÇÕES------↑*/
 
 int diasMes[] = {
   31, // Jan
@@ -62,7 +51,6 @@ int diasMes[] = {
   30, // Nov
   31  // Dez
 };
-/*↑------VETOR PARA OS DIAS CERTOS DE CADA MES------↑*/
 
 String mod[] = {
   "Retirada",
@@ -70,7 +58,6 @@ String mod[] = {
   "Devolucao",
   "Voltar"
 };
-/*↑------VETOR DE TODAS AS OPÇÕES DE MODOS------↑*/
 
 struct cargaH{
   String trn;
@@ -86,7 +73,6 @@ cargaH turno[] = {
   {"Matutino", 5,
   {"aula 1", "aula 2", "aula 3", "aula 4", "aula 5"}}
 };
-/*↑------VETOR E SEU STRUCT PAR AOS TURNOS E AULAS------↑*/
 
 struct opcQnt{
   int opQnt;
@@ -99,7 +85,6 @@ opcQnt opc[] = {
   {20, "VR"},
   {20, "CrhomeBook"}
 };
-/*↑------VETOR E SEU STRUCT PARA OS OBJETOS E SUA QUANTIDADE------↑*/
 
 struct professor{
   String id;
@@ -113,7 +98,6 @@ professor professores[] = {
     {"04", "Matheus"}
 
 };
-/*↑------VETOR E SEU STRUCT PARA OS IDs E OS PROFESSORES REGISTRADOS------↑*/
 
 char teclas[LINHAS][COLUNAS] = {
   {'1','2','3','A'},
@@ -121,11 +105,9 @@ char teclas[LINHAS][COLUNAS] = {
   {'7','8','9','C'},
   {'*','0','#','D'}
 };
-/*↑------VETOR PARA O MAPEAMENTO DE TRECLAS------↑*/
 
 byte pinosLinhas[LINHAS] = {13, 14, 33, 32};
 byte pinosColunas[COLUNAS] = {26, 25, 27, 21};
-/*↑------DEFINIÇÃO DOS PINOS DO TECLADO------↑*/
 
 Keypad teclado = Keypad(
   makeKeymap(teclas),
@@ -134,8 +116,7 @@ Keypad teclado = Keypad(
   LINHAS,
   COLUNAS
 );
-/*↑------FUNÇÃO PARA O RECONHECIMENTO DAS TECLAS PRESSIONADAS------↑*/
-
+  
 void setup() {
   Serial.begin(9600);
 
@@ -144,17 +125,15 @@ void setup() {
   lcd_1.clear(); 
 
 }
-/*↑------FUNÇÃO DE SETUP (INICIALIZAÇÃO DO ESP)------↑*/
 
 void telaDeLogin(char tecla){
 
   lcd_1.setCursor(0, 0);
   lcd_1.print("Digite seu id");
-  /*↑------PRIMEIRA AÇÃO QUE A FUNÇÃO IRA FAZER ATE O FINAL------↑*/
 
-  if (tecla >= '0' && tecla <= '9'){/*------CONDICIONAL PARA LIMITAR O USO APENAS PARA AS TECLAS NUMERICAS------*/
+  if (tecla >= '0' && tecla <= '9'){  
 
-    if (idBuscado.length() < 2){/*------CONDICIONAL PARA EXIBIR O NUMERO DIGITADO E LIMITAR O NUMERO EM 2 CARACTERES------*/
+    if (idBuscado.length() < 2){  
       idBuscado += tecla;
 
       lcd_1.setCursor(0, 1);
@@ -164,23 +143,23 @@ void telaDeLogin(char tecla){
     }
   }
   
-  if (tecla){/*------CONDICIONAL PARA VERIFICAR SE ALGUMA TECLA FORA DO TECLADO NUMERICO FOI PRESSIONADO------*/
+  if (tecla){  
 
-    if (tecla == '#'){/*------CONDICIONAL PARA VERIFICAR SE A TECLA FOI O SIMBOLO #------*/
+    if (tecla == '#'){  
       idBuscado = "";
       lcd_1.setCursor(0, 1);
       lcd_1.clear();
     }
   }
-  /*↑------CONDICIONAL PARA LIMPAR O NUMERO DIGITADO------↑*/
+    
 
-  if (tecla){/*------CONDICIONAL PARA VERIFICAR SE ALGUMA TECLA FORA DO TECLADO NUMERICO FOI PRESSIONADO------*/
+  if (tecla){  
 
-    if (tecla == 'A'){/*------CONDICIONAL PARA VERIFICAR SE A TECLA FOI A LETRA A------*/
+    if (tecla == 'A'){  
 
-      for (int i = 0; i < sizeof(professores) / sizeof(professores[0]); i++){/*------LAÇO DE REPETIÇÃO PARA PECORRER TODO O VETOR E VERIFICAR OS IDs------*/
+      for (int i = 0; i < sizeof(professores) / sizeof(professores[0]); i++){  
 
-        if(professores[i].id == idBuscado){ /*------CONDICIONAL DE SUCESSO CASO O PROFESSOR FOI ENCONCTRADO------*/
+        if(professores[i].id == idBuscado){   
           encontrou = true;
 
           lcd_1.clear();
@@ -193,7 +172,7 @@ void telaDeLogin(char tecla){
         }
       }
 
-      if (!encontrou) {/*↑------CONDICIONAL PARA O ERRO DE NÃO ENCONTRAR O ID------↑*/
+      if (!encontrou) {  
         lcd_1.setCursor(0, 1);
         lcd_1.clear();
         lcd_1.print("Id inexistente");
@@ -204,10 +183,10 @@ void telaDeLogin(char tecla){
     }
   }
 }
-/*↑------FUNÇÃO TELA DE LOGIN------↑*/
+  
 
 void escolhaMod(char tecla){
-  if (tecla == 'C') {/*------CONDICIONAL PARA O REINICIAMENTO DO PROCESSO------*/
+  if (tecla == 'C') {  
     lcd_1.clear();
     Save = estado;
     estado = 11;
@@ -218,11 +197,11 @@ void escolhaMod(char tecla){
   lcd_1.print("Escolha o Modo");
   lcd_1.setCursor(0, 1);
   lcd_1.print(mod[n]);
-  /*↑------PRIMEIRA AÇÃO QUE A FUNÇÃO IRA FAZER ATE O FINAL------↑*/
+    
 
-  if (tecla){/*↑------CONDICIONAL PARA QUANDO UMA TECLA FOR PRESSIONADA------↑*/
+  if (tecla){  
 
-    if (tecla == '1'){/*↓------CONDICIONAIS PARA MUDAR A OPÇÃO EXIBIDA NO TECLADO------↓*/
+    if (tecla == '1'){  
       lcd_1.clear();
       n = 0;
     }
@@ -239,10 +218,10 @@ void escolhaMod(char tecla){
       n = 3;
     }
 
-    if(tecla == 'A'){/*------CONDICIONAL PARA QUANDO A TECLA 'A' FOR PRESSIONADA------*/
+    if(tecla == 'A'){  
 
-      /*↓------CONDICIONAIS PARA MUDAR PARA IR PARA CADA TELA DESEJADA------↓*/
-      if (n == 0){/*------TELA DE RETIRADA------*/
+        
+      if (n == 0){  
         lcd_1.clear();
         lcd_1.setCursor(0, 0);
         lcd_1.print(mod[n]);
@@ -252,7 +231,7 @@ void escolhaMod(char tecla){
         estado = 2;
         n = 0;
       }
-      if (n == 1){/*------TELA DE AGENDAMENTO------*/
+      if (n == 1){  
         lcd_1.clear();
         lcd_1.setCursor(0, 0);
         lcd_1.print(mod[n]);
@@ -262,7 +241,7 @@ void escolhaMod(char tecla){
         estado = 6;
         n = 0;
       }
-      if (n == 2){/*------TELA DE DEVOLUÇÃO------*/
+      if (n == 2){  
         lcd_1.clear();
         lcd_1.setCursor(0, 0);
         lcd_1.print(mod[n]);
@@ -272,7 +251,7 @@ void escolhaMod(char tecla){
         estado = 2;
         n = 0;
       }
-      if (n == 3){/*------OPÇÃO DE VOLTA------*/
+      if (n == 3){  
         lcd_1.clear();
         lcd_1.setCursor(0, 0);
         lcd_1.print(mod[n]);
@@ -292,10 +271,10 @@ void escolhaMod(char tecla){
     }
   }
 
-}/*↑------FUNÇÃO TELA DE ESCOLHA DE MODO------↑*/
+}  
 
 void escolhaObj(char tecla){
-  if (tecla == 'C') {/*------CONDICIONAL PARA O REINICIAMENTO DO PROCESSO------*/
+  if (tecla == 'C') {  
     lcd_1.clear();
     Save = estado;
     estado = 11;
@@ -305,9 +284,9 @@ void escolhaObj(char tecla){
   lcd_1.print("Escolha o Objeto");
   lcd_1.setCursor(0, 1);
   lcd_1.print(opc[n].opObj);
-  /*↑------PRIMEIRA AÇÃO QUE A FUNÇÃO IRA FAZER ATE O FINAL------↑*/
+    
 
-  if (tecla){/*↓------CONDICIONAIS PARA MUDAR A OPÇÃO EXIBIDA NO TECLADO------↓*/
+  if (tecla){  
 
     if (tecla == '1'){
       lcd_1.clear();
@@ -326,17 +305,17 @@ void escolhaObj(char tecla){
       n = 3;
     }
 
-    if (tecla == 'A'){/*------CONDICIONAL PARA QUANDO A TECLA 'A' FOR PRESSIONADA------*/
+    if (tecla == 'A'){  
     lcd_1.clear();
     estado = 3;
     objSelecionado = opc[n].opObj;
     objN = n;
    }
   }
-}/*↑------FUNÇÃO TELA DE ESCOLHA DE OBJETO------↑*/
+}  
 
 void escolhaQnt(char tecla){
-  if (tecla == 'C') {/*------CONDICIONAL PARA O REINICIAMENTO DO PROCESSO------*/
+  if (tecla == 'C') {  
     lcd_1.clear();
     Save = estado;
     estado = 11;
@@ -349,11 +328,11 @@ void escolhaQnt(char tecla){
   lcd_1.print("max:");
   lcd_1.setCursor(12, 1);
   lcd_1.print(opc[objN].opQnt);
-  /*↑------PRIMEIRA AÇÃO QUE A FUNÇÃO IRA FAZER ATE O FINAL------↑*/
+    
 
-  if (tecla >= '0' && tecla <= '9'){/*------CONDICIONAL PARA LIMITAR O USO APENAS PARA AS TECLAS NUMERICAS------*/
+  if (tecla >= '0' && tecla <= '9'){  
 
-    if (Qnt.length() < 2){/*------CONDICIONAL VERIFICAR E LIMITAR AS TECLAS EM 2 CARACTERES------*/
+    if (Qnt.length() < 2){  
       Qnt += tecla;
 
       lcd_1.setCursor(0, 1);
@@ -364,7 +343,7 @@ void escolhaQnt(char tecla){
     }
   }
 
-  if (tecla){/*↓------CONDICIONAIS PARA MUDAR A OPÇÃO EXIBIDA NO TECLADO------↓*/
+  if (tecla){  
 
     if (tecla == '#'){
       Qnt = "";
@@ -373,7 +352,7 @@ void escolhaQnt(char tecla){
     }
   }
 
-  if (modSelecionado == "Devolucao"){/*------CONDICIONAIS PARA CASO O MODO ESCOLHIDO SEJA "DEVOLUÇÃO"------*/
+  if (modSelecionado == "Devolucao"){  
     if (tecla){
       if (tecla == 'A'){
         if (opc[objN].opQnt + Qnt.toInt() <= 20 && Qnt.toInt() > 0){
@@ -388,7 +367,7 @@ void escolhaQnt(char tecla){
           qntSelecionada = Qnt;
           erro = 1;
         }
-        if (!Quantidade){/*------CONDICIONAIS PARA CASO O NUMERO DE ITENS DEVOLVIDOS SEJAM MAIORES DOQUE O DE ESTOQUE------*/
+        if (!Quantidade){  
           lcd_1.setCursor(0, 1);
           lcd_1.clear();
           lcd_1.print("Quantidade");
@@ -402,7 +381,7 @@ void escolhaQnt(char tecla){
     }
   }
 
-  else if (tecla && modSelecionado != "Devolucao" ){/*------CONDICIONAIS PARA CASO O MODO ESCOLHIDO NÃO SEJA "DEVOLUÇÃO"------*/
+  else if (tecla && modSelecionado != "Devolucao" ){  
     if (tecla == 'A'){
       if(Qnt.toInt() < opc[objN].opQnt && Qnt.toInt() > 0){
         Quantidade = true;
@@ -414,7 +393,7 @@ void escolhaQnt(char tecla){
         estado = 4;
         qntSelecionada = Qnt;
       }
-      if (!Quantidade){/*------CONDICIONAIS PARA CASO A QUANTIDADE DE RETIRADA SEJA MAIOR QUE A DE ESTOQUE OU QUE NÃO AJA MAIS ESTOQUE------*/
+      if (!Quantidade){  
         lcd_1.setCursor(0, 1);
         lcd_1.clear();
         lcd_1.print("Quantidade");
@@ -427,21 +406,21 @@ void escolhaQnt(char tecla){
 
     }
   }
-}/*↑------FUNÇÃO TELA DE QUANTIDADE------↑*/
+}  
 
 void confirmSet(char tecla){
-  if (tecla == 'C') {/*------CONDICIONAL PARA O REINICIAMENTO DO PROCESSO------*/
+  if (tecla == 'C') {  
     lcd_1.clear();
     Save = estado;
     estado = 11;
     return;
   }
-  if (modSelecionado == "Agendamento"){/*------CASO SEJA 'AGENDAMENTO' EXIBIR MAIS TELAS------*/
+  if (modSelecionado == "Agendamento"){  
     if (tecla == 'A') {
         estado = 5;   
         return;
     }
-    if (millis() - ultimoTempo >= 2000) {/*------TIMER PARA A ALTERNANCIA DE TELAS, MOSTRANDO TODAS AS OPÇÕES POSSIVEIS------*/
+    if (millis() - ultimoTempo >= 2000) {  
         ultimoTempo = millis();
         pagina++;
         if (pagina > 3)
@@ -474,11 +453,11 @@ void confirmSet(char tecla){
   }
   }
   else {
-    if (tecla == 'A') {/*------CASO NÃO SEJA 'AGENDAMENTO' EXIBIR A QUANTIDADE PADRÃO DE TELAS------*/
+    if (tecla == 'A') {  
           estado = 5;   
           return;
       }
-      if (millis() - ultimoTempo >= 2000) {/*------TIMER PARA A ALTERNANCIA DE TELAS, MOSTRANDO TODAS AS OPÇÕES POSSIVEIS------*/
+      if (millis() - ultimoTempo >= 2000) {  
           ultimoTempo = millis();
           pagina++;
           if (pagina > 1)
@@ -499,7 +478,7 @@ void confirmSet(char tecla){
     }
   }
   
-}/*↑------FUNÇÃO TELA DE CONFIRMAÇÃO------↑*/
+}  
 
 void final(char tecla){
   lcd_1.clear();
@@ -529,9 +508,9 @@ void final(char tecla){
   dtSelecionada = "";
   trnSelecionado = "";
   hrSelecionado = "";
-  /*↑------REINICIA TODAS AS VARIAVEIS PARA O PROSSIMO REGISTRO------↑*/
+    
 
-}/*↑------FUNÇÃO TELA DE FINALIZAÇÃO------↑*/
+}  
 
 void escolhaDia(char tecla){
   if (tecla == 'C') {
@@ -566,7 +545,7 @@ void escolhaDia(char tecla){
         estado = 7;
       }
     }
-}/*↑------FUNÇÃO TELA DE ESCOLHA DE DIA------↑*/
+}  
 
 void escolhaMes(char tecla){
   if (tecla == 'C') {
@@ -611,7 +590,7 @@ void escolhaMes(char tecla){
       estado = 6;
       }
     }
-}/*↑------FUNÇÃO TELA DE ESCOLHA DE MÊS------↑*/
+}  
 
 void dataConfirm(char tecla){
   if (tecla == 'C') {
@@ -668,7 +647,7 @@ void dataConfirm(char tecla){
       }
   }
   
-}/*↑------FUNÇÃO TELA DE CONFIRMAÇÃO DE DATA------↑*/
+}  
 
 void escolhaTurno(char tecla){
   if (tecla == 'C') {
@@ -730,7 +709,7 @@ void escolhaTurno(char tecla){
         }
       }
   }
-}/*↑------FUNÇÃO TELA DE ESCOLHA DE TURNO------↑*/
+}  
 
 void escolhaAula(char tecla){
   if (tecla == 'C') {
@@ -847,7 +826,7 @@ void escolhaAula(char tecla){
         }
       }
   }
-}/*↑------FUNÇÃO TELA DE ESCOLHA DE AULA------↑*/
+}  
 
 void reiniciarEscolhas(char tecla) {
   lcd_1.setCursor(0, 0);
@@ -856,10 +835,10 @@ void reiniciarEscolhas(char tecla) {
   lcd_1.print("A - Sim");
   lcd_1.setCursor(8, 1);
   lcd_1.print("B - Nao");
-  /*↑------TELA DE CONFIRMAÇÃO PARA REINICIAMENTO DAS ESCOLHAS------↑*/
+    
 
   if (tecla){
-    if (tecla == 'A') /*------OPÇÃO DE CONFIRMAÇÃO------*/
+    if (tecla == 'A')   
       n = 0;
       pagina = 0;
       erro = 0;
@@ -875,11 +854,11 @@ void reiniciarEscolhas(char tecla) {
 
       estado = 1; 
       lcd_1.clear();
-    if (tecla == 'B')/*------OPÇÃO DE NEGAÇÃO------*/
+    if (tecla == 'B')  
     estado = Save;
     lcd_1.clear();
   }
-}/*↑------FUNÇÃO DE REINICIAÇÃO------↑*/
+}  
 
 void loop() {
 
@@ -888,40 +867,40 @@ void loop() {
   switch (estado){
     
     case 0:
-      telaDeLogin(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE LOGIN------*/
+      telaDeLogin(tecla);   
       break;
     case 1:
-      escolhaMod(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE ESCOLHA DE MODO------*/
+      escolhaMod(tecla);   
       break;
     case 2:
-      escolhaObj(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE ESCOLHA DE OBJETO------*/
+      escolhaObj(tecla);   
       break;
     case 3:
-      escolhaQnt(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE ESCOLHA DE QUANTIDADE------*/
+      escolhaQnt(tecla);   
       break;
     case 4: 
-      confirmSet(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE CONFIRMAÇÃO DAS OPÇÕES SELECIONADAS------*/
+      confirmSet(tecla);   
       break;
     case 5:
-      final(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE FINALIZAÇÃO------*/
+      final(tecla);   
       break;
     case 6:
-      escolhaDia(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE ESCOLHA DO DIA------*/
+      escolhaDia(tecla);   
       break;
     case 7:
-      escolhaMes(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE ESCOLHA DO MÊS------*/
+      escolhaMes(tecla);   
       break;
     case 8:
-      dataConfirm(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE CONFIRMAÇÃO DA DATA------*/
+      dataConfirm(tecla);   
       break;
     case 9:
-      escolhaTurno(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE ESCOLHA DO TURNO------*/
+      escolhaTurno(tecla);   
       break;
     case 10:
-      escolhaAula(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE ESCOLHA DA AULA------*/
+      escolhaAula(tecla);   
       break;
     case 11:
-      reiniciarEscolhas(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE REINICIALIZAÇÃO------*/
+      reiniciarEscolhas(tecla);   
       break;
     }
 }
