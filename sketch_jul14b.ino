@@ -924,4 +924,4 @@ void loop() {
       reiniciarEscolhas(tecla); /*------CHAMADA DA FUNÇÃO DE TELA DE REINICIALIZAÇÃO------*/
       break;
     }
-}/*↑------FUNÇÃO DE LOOPING------↑*/
+}
