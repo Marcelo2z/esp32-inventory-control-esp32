@@ -1,0 +1,52 @@
+name: firmware
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'sketch_jul14b.ino'
+      - 'src/**'
+      - '.github/workflows/firmware.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: arduino/setup-arduino-cli@v2
+
+      - name: Instalar core ESP32 e bibliotecas
+        run: |
+          arduino-cli config init
+          arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+          arduino-cli core update-index
+          arduino-cli core install esp32:esp32
+          arduino-cli lib install "ArduinoJson"
+          arduino-cli lib install "Keypad"
+
+      - name: Ler versao do Config.h
+        id: versao
+        run: echo "valor=$(grep -oP 'FIRMWARE_VERSAO\s+\K[0-9]+' src/Config.h)" >> "$GITHUB_OUTPUT"
+
+      - name: Compilar
+        run: arduino-cli compile --fqbn esp32:esp32:esp32 --output-dir build sketch_jul14b.ino
+
+      - name: Preparar firmware.bin e manifest
+        run: |
+          cp build/*.ino.bin firmware.bin
+          echo "{\"versao\": ${{ steps.versao.outputs.valor }}}" > firmware.json
+
+      - name: Publicar release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: fw-${{ steps.versao.outputs.valor }}
+          name: Firmware ${{ steps.versao.outputs.valor }}
+          make_latest: true
+          files: |
+            firmware.bin
+            firmware.json
