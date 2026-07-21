@@ -7,11 +7,21 @@
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
   </component>
+  <component name="CMakeProjectFlavorService">
+    <option name="flavorId" value="CMakePlainProjectFlavor" />
+  </component>
   <component name="CMakeSettings">
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f5ad505-e04d-40d4-b0a5-ac3b0cc13a62" name="Changes" comment="" />
+    <list default="true" id="4f5ad505-e04d-40d4-b0a5-ac3b0cc13a62" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sketch_jul14b.ino" beforeDir="false" afterPath="$PROJECT_DIR$/sketch_jul14b.ino" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sketch_jul14b.ino.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Config.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/Config.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Ui.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Ui.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ui/Ui.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/Ui.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,7 +39,6 @@
     <option name="debugProfileId" value="7bb280bd-38e5-424f-9e2e-7975a5a99514" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="30" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="Git.Settings">
@@ -42,40 +51,104 @@
     <commands />
     <urls />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5,
-  "fromUser": false
-}]]></component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.0" />
+      <entry key="MS500" value="1.0" />
+      <entry key="S2" value="1.0" />
+      <entry key="S5" value="1.000000006456024" />
+      <entry key="S10" value="1.0002013525074334" />
+      <entry key="S30" value="1.2118126346912994" />
+      <entry key="S60" value="2.2157527944075506" />
+      <entry key="M2" value="3.91609826355284" />
+      <entry key="M5" value="5.931046261974933" />
+      <entry key="M10" value="6.875053113398769" />
+      <entry key="M15" value="7.228340915434872" />
+      <entry key="M30" value="7.602896005028766" />
+      <entry key="H1" value="7.798546321488455" />
+      <entry key="H2" value="7.898537088959006" />
+      <entry key="H4" value="7.949083177968553" />
+      <entry key="D1" value="7.991488002379436" />
+      <entry key="W1" value="7.9987833655102065" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="4.382033291677505E-89" />
+      <entry key="S2" value="8.136149464802308E-23" />
+      <entry key="S5" value="1.4593772347072928E-9" />
+      <entry key="S10" value="3.820179622357164E-5" />
+      <entry key="S30" value="0.03367916078261474" />
+      <entry key="S60" value="0.18351882950426296" />
+      <entry key="M2" value="0.42839097738428494" />
+      <entry key="M5" value="0.7124200378402681" />
+      <entry key="M10" value="0.8440497839821227" />
+      <entry key="M15" value="0.8931245802801996" />
+      <entry key="M30" value="0.9450526865102282" />
+      <entry key="H1" value="0.9721382034002306" />
+      <entry key="H2" value="0.9859706909438183" />
+      <entry key="H4" value="0.9929605686752211" />
+      <entry key="D1" value="0.9988233053461874" />
+      <entry key="W1" value="0.9998318159298788" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="3.884455487084564E-4" />
+      <entry key="MS500" value="0.20790552459372658" />
+      <entry key="S2" value="0.6752529768611794" />
+      <entry key="S5" value="0.8546466736816456" />
+      <entry key="S10" value="0.924699125300245" />
+      <entry key="S30" value="1.2154390296040622" />
+      <entry key="S60" value="2.374080075811083" />
+      <entry key="M2" value="4.323303263944902" />
+      <entry key="M5" value="6.630917542567135" />
+      <entry key="M10" value="7.711873650300414" />
+      <entry key="M15" value="8.11640772116441" />
+      <entry key="M30" value="8.54529348274301" />
+      <entry key="H1" value="8.769323925991783" />
+      <entry key="H2" value="8.883819048938857" />
+      <entry key="H4" value="8.941697250028065" />
+      <entry key="D1" value="8.990253260306533" />
+      <entry key="W1" value="8.99860688162799" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3GmxfYm4eYOmFsLTcOQikv7DkvS" />
+  <component name="ProjectStatusUIService">{
+  &quot;uiKindId&quot;: &quot;Widget&quot;
+}</component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "CidrDebugProfileConversion": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.RadMigrateCodeStyle": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "copilot.chat.legacySessionMetadata.migrated": "true",
-    "git-widget-placeholder": "main",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.ilscipio.language.arduino.settings.ArduinoSettingsConfigurable",
-    "to.speed.mode.migration.done": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;CidrDebugProfileConversion&quot;: &quot;true&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.RadMigrateCodeStyle&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;copilot.chat.legacySessionMetadata.migrated&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;refac/architecture&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/porsino/dev/inventario&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4f5ad505-e04d-40d4-b0a5-ac3b0cc13a62" name="Changes" comment="" />
@@ -88,6 +161,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
