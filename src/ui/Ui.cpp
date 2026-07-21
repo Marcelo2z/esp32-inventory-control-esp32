@@ -1,4 +1,5 @@
 #include "Ui.h"
+#include "../Config.h"
 
 static const byte LINHAS = 4;
 static const byte COLUNAS = 4;
@@ -32,16 +33,28 @@ static bool ehDigito(char tecla) {
   return tecla >= '0' && tecla <= '9';
 }
 
-Ui::Ui(Display &display, ApiClient &api)
+Ui::Ui(Display &display, ApiClient &api, AtualizadorOta &ota)
   : display(display),
     api(api),
+    ota(ota),
     teclado(makeKeymap(teclas), pinosLinhas, pinosColunas, LINHAS, COLUNAS),
     qtdRecursos(0),
     tela(LOGIN),
     telaAnterior(LOGIN),
     cursor(0),
     paginaConfirmacao(0),
-    ultimoGiro(0) {
+    ultimoGiro(0),
+    ultimaVerificacaoOta(0) {
+}
+
+void Ui::verificarAtualizacao() {
+  display.mensagem("Buscando", "atualizacao...", 0);
+  if (ota.haNovaVersao()) {
+    display.mensagem("Atualizando", "nao desligue", 0);
+    ota.atualizar();
+    display.mensagem("Falha na OTA", "", 1500);
+  }
+  ultimaVerificacaoOta = millis();
 }
 
 void Ui::iniciar() {
@@ -51,6 +64,8 @@ void Ui::iniciar() {
   api.conectar();
 
   if (api.conectado()) {
+    verificarAtualizacao();
+
     display.mensagem("Carregando...", "", 0);
     qtdRecursos = api.carregarRecursos(recursos, MAX_RECURSOS);
   } else {
@@ -61,6 +76,13 @@ void Ui::iniciar() {
 
 void Ui::atualizar() {
   char tecla = teclado.getKey();
+
+  if (tela == LOGIN && op.codigo.length() == 0 && api.conectado()
+      && millis() - ultimaVerificacaoOta >= OTA_INTERVALO_MS) {
+    verificarAtualizacao();
+    irPara(LOGIN);
+    return;
+  }
 
   if (tela == ENVIAR) {
     enviar();
@@ -365,7 +387,7 @@ void Ui::menuAula(char tecla) {
 }
 
 void Ui::reiniciar(char tecla) {
-  display.linha(0, "Qer reiniciar?");
+  display.linha(0, "Quer reiniciar?");
   display.linha(1, "A - Sim  B - Nao");
 
   if (tecla == 'A') {

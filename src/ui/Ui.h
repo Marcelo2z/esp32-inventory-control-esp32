@@ -5,11 +5,12 @@
 
 #include "Display.h"
 #include "../api/ApiClient.h"
+#include "../ota/AtualizadorOta.h"
 #include "../model/Recurso.h"
 
 class Ui {
 public:
-  Ui(Display &display, ApiClient &api);
+  Ui(Display &display, ApiClient &api, AtualizadorOta &ota);
 
   void iniciar();
   void atualizar();
@@ -43,6 +44,7 @@ private:
 
   Display &display;
   ApiClient &api;
+  AtualizadorOta &ota;
   Keypad teclado;
 
   Recurso recursos[MAX_RECURSOS];
@@ -53,6 +55,7 @@ private:
   int cursor;
   int paginaConfirmacao;
   unsigned long ultimoGiro;
+  unsigned long ultimaVerificacaoOta;
 
   Operacao op;
   Recurso recursoAtual;
@@ -61,6 +64,7 @@ private:
 
   void irPara(Tela destino);
   void limparOperacao(bool manterLogin);
+  void verificarAtualizacao();
   int turnoParaApi(int indice);
 
   void login(char tecla);
